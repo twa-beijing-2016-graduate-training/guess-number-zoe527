@@ -62,9 +62,26 @@ describe("guess_num", function(){
             sinon.spy(console, 'log');
             sinon.stub(guess, "AnswerGenerator").returns("1234");
             guess.Guess("1234");
-            var result = _.flatten(console.log.args[1]).join("\n");
+            var result = _.flatten(console.log.args).join("\n");
             var expect_string = "4A0B";
             expect(expect_string).to.equal(result);
+        });
+    });
+
+    var input_arr_one = ["1234","4321","1223","5612","4231","5678"]
+    var input_arr_two = ["5678","4321","1223","5612","1234","4231"]
+    var input_arr_three = ["1254","4321","1253","5612","4231","5678"]
+    describe("main", function() {
+        it("case1:should return Cannot input duplicate numbers!", function(){
+            guess.main(input_arr_one);
+        });
+
+        it("case2:should return Congratulations!", function(){
+            guess.main(input_arr_two);
+        });
+
+        it("case2:should return Game Over", function(){
+            guess.main(input_arr_three);
         });
     });
 
